@@ -82,6 +82,13 @@ export default function Home() {
               </View>
             </View>
           )}
+        <Link href="/channel" asChild>
+            <Pressable className="mx-4 mt-6 mb-8 bg-blue-600 p-4 rounded-lg">
+              <Text className="text-white font-semibold text-center text-lg">
+                Go to Channel Analysis
+              </Text>
+            </Pressable>
+          </Link>
         </ScrollView>
       </View>
     </>
