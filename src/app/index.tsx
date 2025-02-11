@@ -1,6 +1,7 @@
 import { Stack, Link } from 'expo-router';
 import { View, Text, TextInput, ScrollView, Pressable } from 'react-native';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { supabase } from '~/lib/supabase';
 
 const popularChannels = [
   { name: 'MKBHD', url: 'https://youtube.com/@mkbhd' },
@@ -12,12 +13,13 @@ export default function Home() {
   const [searchInput, setSearchInput] = useState('');
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
 
-  const handleSearch = () => {
-    if (searchInput.trim()) {
-      setRecentSearches(prev => [searchInput, ...prev.slice(0, 4)]);
-      // TODO: Implement search functionality
-    }
-  };
+  const startAnalyzing = async () => {
+    const { error, data } = await supabase.functions.invoke('trigger_collection_api', { 
+      body: { name: 'Vadim' },
+    });
+    console.log('error:', error)
+    console.log('data:', data)
+  }
 
   return (
     <>
@@ -41,7 +43,7 @@ export default function Home() {
               />
               <Pressable
                 className="bg-red-600 px-6 rounded-lg items-center justify-center"
-                onPress={handleSearch}
+                onPress={startAnalyzing}
               >
                 <Text className="text-white font-semibold">Analyze</Text>
               </Pressable>
