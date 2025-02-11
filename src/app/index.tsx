@@ -10,12 +10,13 @@ const popularChannels = [
 ];
 
 export default function Home() {
+  const [url, setUrl ] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
 
   const startAnalyzing = async () => {
     const { error, data } = await supabase.functions.invoke('trigger_collection_api', { 
-      body: { name: 'Vadim' },
+      body: { url },
     });
     console.log('error:', error)
     console.log('data:', data)
@@ -38,8 +39,8 @@ export default function Home() {
               <TextInput
                 className="flex-1 h-12 px-4 rounded-lg bg-gray-200 border border-gray-200"
                 placeholder="Enter YouTube channel URL"
-                value={searchInput}
-                onChangeText={setSearchInput}
+                value={url}
+                onChangeText={setUrl}
               />
               <Pressable
                 className="bg-red-600 px-6 rounded-lg items-center justify-center"

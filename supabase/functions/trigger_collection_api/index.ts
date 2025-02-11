@@ -13,17 +13,27 @@ serve(async (req) => {
   }
 
   try {
-    const { name } = await req.json()
-    const data = { message: `Hello ${name}` }
+    const { url } = await req.json()
+
+    const response = await fetch(`https://api.brightdata.com/datasets/v3/trigger?dataset_id=gd_lk538t2k2p1k3oos71&include_errors=true`, {
+      headers: {
+        Authorization: `Bearer ${Deno.env.get('BRIGHT_DATA_API_KEY')}`,
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify([{ url }]),
+    })
+
+    const responseData = await response.json()
 
     return new Response(
-      JSON.stringify(data),
-      { 
+      JSON.stringify({ responseData }),
+      {
         headers: {
           ...corsHeaders,
           'Content-Type': 'application/json',
         },
-      },
+      }
     )
   } catch (error) {
     return new Response(JSON.stringify({ error: error.message }), {
