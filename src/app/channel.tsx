@@ -34,13 +34,11 @@ const channel =
 export default function Channel() {
     return (
         <View className="flex-1 bg-white">
-            {/* Banner Section */}
             <View className="w-full h-56 relative">
                 <Image 
                     source={{ uri: channel.banner_img }} 
                     className="w-full min-h-[10rem] object-cover"
                 />
-                {/* Profile Image Overlay */}
                 <View className="absolute -bottom-[4.5rem] left-4">
                     <Image 
                         source={{ uri: channel.profile_image }} 
@@ -49,7 +47,6 @@ export default function Channel() {
                 </View>
             </View>
 
-            {/* Channel Info Section */}
             <View className="mt-20 px-6 ">
                 <Text className="text-3xl font-bold text-gray-900">{channel.name}</Text>
                 <Text className="text-gray-500 mt-1 font-medium">{channel.handle}</Text>
@@ -76,14 +73,12 @@ export default function Channel() {
                 </View>
             </View>
 
-            {/* Description Section */}
             <View className="mt-8 px-6">
                 <Text className="text-gray-700 leading-relaxed whitespace-pre-line">
                     {channel.Description}
                 </Text>
             </View>
 
-            {/* Links Section */}
             <View className="mt-8 px-6">
                 <Text className="text-lg font-semibold text-gray-900 mb-3">Links</Text>
                 <View className="space-y-2">
